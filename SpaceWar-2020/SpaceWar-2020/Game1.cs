@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace SpaceWar_2020
 {
@@ -11,6 +12,11 @@ namespace SpaceWar_2020
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        List<Powerup> powerups;
+
+        Texture2D powerupTexture;
+
+        int powerupSpawnTime = 5000;
 
         public Game1()
         {
