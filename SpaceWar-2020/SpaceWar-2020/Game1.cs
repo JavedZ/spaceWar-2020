@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace SpaceWar_2020
@@ -12,11 +13,11 @@ namespace SpaceWar_2020
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Powerup> powerups;
+        Random random = new Random();
+        Player1 player1;
+        Player2 player2;
+       // Texture2D topdownfighter1;
 
-        Texture2D powerupTexture;
-
-        int powerupSpawnTime = 5000;
 
         public Game1()
         {
@@ -46,6 +47,10 @@ namespace SpaceWar_2020
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //Initierar spelare med bild och position
+            player1 = new Player1(Content.Load<Texture2D>("topdownfighter_r_160"), new Vector2(25, 200));
+            player2 = new Player2(Content.Load<Texture2D>("topdownfighter_g_160"), new Vector2(20, 225));
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -68,7 +73,9 @@ namespace SpaceWar_2020
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            //Uppdaterar spelaren
+            player1.Update();
+            player2.Update();
 
             base.Update(gameTime);
         }
@@ -81,7 +88,14 @@ namespace SpaceWar_2020
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            //Ritar ut spelaren
+            player1.Draw(spriteBatch);
+
+            player2.Draw(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
